@@ -14,12 +14,6 @@ main {
     justify-content: space-evenly;
 }
 
-section {
-    width: 50%;
-    max-width: 50%;
-    margin: 15px;
-}
-
 .button {
     background-color: #fff;
     border: 2px solid #bdc2c4;
@@ -35,4 +29,10 @@ section {
         background-color: #bdc2c4;
         color: white;
     }
+}
+
+section {
+    width: 50%;
+    max-width: 50%;
+    margin: 15px;
 }

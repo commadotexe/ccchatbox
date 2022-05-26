@@ -1,4 +1,5 @@
 import { useAppSelector } from '../../hooks';
+import { rgb2hex } from '../../helpers';
 
 const generateCheckout = (format: string) => {
     return (format == "css" ? generateCss() : generateLink());
@@ -22,17 +23,18 @@ const generateCss = () => {
             
             body {
                 text-shadow: 0 0 1px #000, 0 0 2px #000;
-                background: ${settings.backgroundColor};
+                background: #${rgb2hex(settings.backgroundColor)};
                 font-family: 'Roboto';
                 font-weight: 700;
                 font-size: ${settings.fontSize};
                 line-height: 1.5em;
-                color: ${settings.textColor};
+                color: #${rgb2hex(settings.textColor)};
             }
             
             #log>div {
-                animation: fadeInRight .3s ease forwards, fadeOut 0.5s ease ${settings.messageHideDelay === 0 ? 999999999 : settings.messageHideDelay}s forwards;
-                -webkit-animation: fadeInRight .3s ease forwards, fadeOut 0.5s ease ${settings.messageHideDelay === 0 ? 999999999 : settings.messageHideDelay}s forwards;
+                animation: ${settings.animationDisabled ? '' : 'fadeInRight .3s ease forwards,'} fadeOut 0.5s ease ${settings.messageHideDelay === 0 ? 999999999 : settings.messageHideDelay}s forwards;
+                -webkit-animation: ${settings.animationDisabled ? '' : 'fadeInRight .3s ease forwards,'} fadeOut 0.5s ease ${settings.messageHideDelay === 0 ? 999999999 : settings.messageHideDelay}s forwards;
+                display: ${settings.nameSeparate ? 'block' : 'table-row'};
             }
             
             .colon {
@@ -75,6 +77,7 @@ const generateCss = () => {
                 background: rgba(000, 000, 000, 0.5);
                 vertical-align: top;
                 display: table-cell;
+                display: ${settings.nameSeparate ? 'block' : 'table-cell'};
                 padding-bottom: 0.1em;
             }
             
@@ -85,6 +88,10 @@ const generateCss = () => {
                 white-space: nowrap;
                 text-overflow: ellipsis;
                 overflow: hidden;
+                position: ${settings.nameSeparate ? 'relative' : 'static'};
+                text-align: ${settings.nameSeparate ? 'left' : 'right'};
+                top: ${settings.nameTop}px;
+                left: ${settings.nameLeft}px;
             }
             
             #log .message {

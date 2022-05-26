@@ -1,4 +1,3 @@
-import ColorPicker from './ColorPicker';
 import './RowWrapper.scss';
 
 type RowWrapperProps = {

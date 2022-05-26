@@ -30,14 +30,14 @@
         appearance: none;
         width: 15px;
         height: 15px;
-        background: #000000;
+        background: #3f3f3f;
         cursor: pointer;
     }
     
     & input::-moz-range-thumb {
         width: 15px;
         height: 15px;
-        background: #000000;
+        background: #3f3f3f;
         cursor: pointer;
     }
 }

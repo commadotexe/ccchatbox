@@ -1,0 +1,29 @@
+.group {
+    font-size: 18px;
+
+    &__title {
+        margin-top: 5px;
+
+        &--open::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-width: 12px 6px 0 6px;
+            border-color: #000000 transparent transparent transparent;
+            border-style: solid;
+        }
+
+        &--closed::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-width: 6px 0 6px 12px;
+            border-color: transparent transparent transparent #000000;
+            border-style: solid;
+        }
+    }
+
+    &__children {
+        padding-left: 5%;
+    }
+}

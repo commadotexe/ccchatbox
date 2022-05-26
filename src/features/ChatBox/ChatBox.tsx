@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../hooks';
+import type * as CSS from 'csstype';
 import './ChatBox.scss'
 
 import Message from './Message';
@@ -13,13 +14,13 @@ const ChatBox = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             setMessages((old) => [...old, testMesages[Math.floor(Math.random()*testMesages.length)]]);
-        }, 1000);
+        }, 3000);
         return () => clearInterval(interval);
       }, []);
 
-    const chatBoxStyle = {
-        background: settings.backgroundColor,
-        color: settings.textColor,
+    const chatBoxStyle: CSS.Properties = {
+        background: `rgba(${settings.backgroundColor.r}, ${settings.backgroundColor.g}, ${settings.backgroundColor.b}, ${settings.backgroundColor.a})`,
+        color: `rgba(${settings.textColor.r}, ${settings.textColor.g}, ${settings.textColor.b}, ${settings.textColor.a})`,
         fontSize: `${settings.fontSize}px`,
     }
 
