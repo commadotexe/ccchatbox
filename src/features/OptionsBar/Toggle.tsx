@@ -16,7 +16,7 @@ const Toggle = ({ selector }: ToggleProps) => {
 
     return (
         <div className='toggle'>
-            <input type="checkbox" checked={value as boolean} />
+            <input type='checkbox' checked={value as boolean} onChange={handleChange} />
             <span onClick={handleChange} />
         </div>
     )

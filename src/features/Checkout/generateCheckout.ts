@@ -1,5 +1,5 @@
 import { useAppSelector } from '../../hooks';
-import { rgb2hex } from '../../helpers';
+import { rgba2string } from '../../helpers';
 
 const generateCheckout = (format: string) => {
     return (format == "css" ? generateCss() : generateLink());
@@ -22,13 +22,13 @@ const generateCss = () => {
             }
             
             body {
-                text-shadow: 0 0 1px #000, 0 0 2px #000;
-                background: #${rgb2hex(settings.backgroundColor)};
+                text-shadow: ${settings.textShadowDisabled ? 'none' : '0 0 1px #000, 0 0 2px #000'};
+                background: ${rgba2string(settings.backgroundColor)};
                 font-family: 'Roboto';
                 font-weight: 700;
                 font-size: ${settings.fontSize};
                 line-height: 1.5em;
-                color: #${rgb2hex(settings.textColor)};
+                color: ${rgba2string(settings.textColor)};
             }
             
             #log>div {
@@ -49,6 +49,7 @@ const generateCss = () => {
                 padding: 0 10px 10px;
                 width: 100%;
                 table-layout: fixed;
+                border-collapse: separate;
             }
             
             #log>div {
@@ -74,15 +75,15 @@ const generateCss = () => {
             }
             
             #log .message,#log .meta {
-                background: rgba(000, 000, 000, 0.5);
                 vertical-align: top;
-                display: table-cell;
-                display: ${settings.nameSeparate ? 'block' : 'table-cell'};
+                display: ${settings.nameSeparate ? 'inline-block' : 'table-cell'};
                 padding-bottom: 0.1em;
             }
             
             #log .meta {
-                width: 35%;
+                width: ${settings.nameSeparate ? 'fit-content' : '35%'};
+                margin-right: ${settings.nameSeparate ? 'auto' : '0'};
+                background: ${rgba2string(settings.nameBackgroundColor)};
                 text-align: right;
                 padding-right: 0.5em;
                 white-space: nowrap;
@@ -92,11 +93,21 @@ const generateCss = () => {
                 text-align: ${settings.nameSeparate ? 'left' : 'right'};
                 top: ${settings.nameTop}px;
                 left: ${settings.nameLeft}px;
+                border-width: ${settings.nameSeparate ? settings.nameBorderWidth + 'px' : settings.nameBorderWidth + 'px 0 ' + settings.nameBorderWidth + 'px ' + settings.nameBorderWidth + 'px'};
+                border-style: ${settings.nameBorderStyle};
+                border-color: ${rgba2string(settings.nameBorderColor)};
+                border-radius: ${settings.nameSeparate ? settings.nameBorderRadius + 'px' : settings.nameBorderRadius + 'px 0 0 ' + settings.nameBorderRadius + 'px'};
             }
             
             #log .message {
                 word-wrap: break-word;
-                width: 65%;
+                display: ${settings.nameSeparate ? 'inline-block' : 'table-cell'};
+                width: ${settings.nameSeparate ? 'auto' : '65%'};
+                background: ${settings.nameSeparate ? rgba2string(settings.messageBackgroundColor) : rgba2string(settings.nameBackgroundColor)};
+                border-width: ${settings.nameSeparate ? settings.messageBorderWidth + 'px' : settings.nameBorderWidth + 'px ' + settings.nameBorderWidth + 'px ' + settings.nameBorderWidth + 'px 0'};
+                border-style: ${settings.nameSeparate ? settings.messageBorderStyle : settings.nameBorderStyle};
+                border-color: ${settings.nameSeparate ? rgba2string(settings.messageBorderColor) : rgba2string(settings.nameBorderColor)};
+                border-radius: ${settings.nameSeparate ? settings.messageBorderRadius + 'px' : '0 ' + settings.nameBorderRadius + 'px ' + settings.nameBorderRadius + 'px 0'};
             }
             
             .badge {

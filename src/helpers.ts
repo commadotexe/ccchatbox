@@ -15,3 +15,7 @@ export const rgb2hex = (rgb : rgbColor) => {
                 (rgb.b | 1 << 8).toString(16).slice(1);
     return(hex.toUpperCase());
 }
+
+export const rgba2string = (rgba: rgbaColor) => {
+    return(`rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`);
+}
