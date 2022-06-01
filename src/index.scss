@@ -10,6 +10,8 @@ html, body {
 }
 
 main {
+    height: 100vh;
+    max-height: 100vh;
     display: flex;
     justify-content: space-evenly;
 }
@@ -32,6 +34,7 @@ main {
 }
 
 section {
+    height: calc(100% - 30px);
     width: 50%;
     max-width: 50%;
     margin: 15px;

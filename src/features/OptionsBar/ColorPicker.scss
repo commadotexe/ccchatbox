@@ -12,9 +12,15 @@
         justify-content: space-between;
         align-items: center;
 
-        & span {
-            text-align: center;
+        & input {
+            width: 20ch;
+            text-align: left;
             margin: 5px;
+            border: none;
+
+            &:focus {
+                outline: none;
+            }
         }
 
         & div {

@@ -1,5 +1,5 @@
 import { useAppSelector } from '../../hooks';
-import { rgba2string } from '../../helpers';
+import { rgba2css } from '../../helpers';
 
 const generateCheckout = (format: string) => {
     return (format == "css" ? generateCss() : generateLink());
@@ -10,111 +10,143 @@ const generateCss = () => {
 
     return (
         `
-            @import url(https://fonts.googleapis.com/css?family=Roboto:700);
+        @import url(https://fonts.googleapis.com/css?family=Roboto:700);
 
-            * {
-                box-sizing: border-box;
-            }
-            
-            html, body {
-                height: 100%;
-                overflow: hidden;
-            }
-            
-            body {
-                text-shadow: ${settings.textShadowDisabled ? 'none' : '0 0 1px #000, 0 0 2px #000'};
-                background: ${rgba2string(settings.backgroundColor)};
-                font-family: 'Roboto';
-                font-weight: 700;
-                font-size: ${settings.fontSize};
-                line-height: 1.5em;
-                color: ${rgba2string(settings.textColor)};
-            }
-            
-            #log>div {
-                animation: ${settings.animationDisabled ? '' : 'fadeInRight .3s ease forwards,'} fadeOut 0.5s ease ${settings.messageHideDelay === 0 ? 999999999 : settings.messageHideDelay}s forwards;
-                -webkit-animation: ${settings.animationDisabled ? '' : 'fadeInRight .3s ease forwards,'} fadeOut 0.5s ease ${settings.messageHideDelay === 0 ? 999999999 : settings.messageHideDelay}s forwards;
-                display: ${settings.nameSeparate ? 'block' : 'table-row'};
-            }
-            
-            .colon {
-                display: none;
-            }
-            
-            #log {
-                display: table;
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                padding: 0 10px 10px;
-                width: 100%;
-                table-layout: fixed;
-                border-collapse: separate;
-            }
-            
-            #log>div {
-                display: table-row;
-            }
-            
-            #log>div.deleted {
-                visibility: hidden;
-            }
-            
-            #log .emote {
-                background-repeat: no-repeat;
-                background-position: center;
-                background-size: contain;
-                padding: 0.4em 0.2em;
-                position: relative;
-            }
-            
-            #log .emote img {
-                display: inline-block;
-                height: 1em;
+        * {
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        body {
+            text-shadow: ${settings.textShadowDisabled ? 'none' : '0 0 1px #000, 0 0 2px #000'};
+            background: ${rgba2css(settings.backgroundColor)};
+            font-family: 'Roboto';
+            font-weight: 700;
+            font-size: ${settings.fontSize};
+            line-height: 1.5em;
+            color: ${rgba2css(settings.textColor)};
+        }
+
+        #log>div {
+            display: flex;
+            justify-content: flex-start;
+            flex-direction: ${settings.metaSeparate ? 'column' : 'row'};
+            animation: ${settings.animationDisabled ? '' : 'fadeInRight .3s ease forwards'}, fadeOut 0.5s ease ${settings.messageHideDelay === 0 ? 999999999 : settings.messageHideDelay}s forwards;
+            webkit-animation: ${settings.animationDisabled ? '' : 'fadeInRight .3s ease forwards'}, fadeOut 0.5s ease ${settings.messageHideDelay === 0 ? 999999999 : settings.messageHideDelay}s forwards;
+            background: ${settings.metaSeparate ? 'none' : rgba2css(settings.messageBackgroundColor)};
+            border-style: ${settings.metaSeparate ? 'none' : settings.messageBorderStyle};
+            border-color: ${rgba2css(settings.messageBorderColor)};
+            border-width: ${settings.messageBorderWidth}px;
+            border-radius: ${settings.messageBorderRadius}px;
+            padding: ${settings.metaSeparate ? 0 : settings.messagePadding}px;
+            margin: ${settings.metaSeparate ? 0 : settings.messageMargin}px;
+        }
+
+        .colon {
+            display: none;
+        }
+
+        #log {
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding: 0 10px 10px;
+            width: 100%;
+        }
+
+        #log>div.deleted {
+            visibility: hidden;
+        }
+
+        #log .emote {
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            padding: 0.4em 0.2em;
+            position: relative;
+        }
+
+        #log .emote img {
+            display: inline-block;
+            height: 1em;
+            opacity: 0;
+        }
+
+        #log .message,#log .meta {
+            display: block;
+            padding-bottom: 0.1em;
+        }
+
+        #log .meta {
+            width: 35%;
+            text-align: right;
+            padding-right: 0.5em;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            width: ${settings.metaSeparate ? 'fit-content' : '35%'};
+            position: ${settings.metaSeparate ? 'relative' : 'static'};
+            text-align: ${settings.metaSeparate ? 'left' : 'right'};
+            top: ${settings.metaTop}px;
+            left: ${settings.metaLeft}px;
+            background: ${settings.metaSeparate ? rgba2css(settings.metaBackgroundColor) : 'none'};
+            border-style: ${settings.metaSeparate ? settings.metaBorderStyle : 'none'};
+            border-color: ${rgba2css(settings.metaBorderColor)};
+            border-width: ${settings.metaBorderWidth}px;
+            border-radius: ${settings.metaBorderRadius}px;
+            padding: ${settings.metaSeparate ? settings.metaPadding + 'px' : '0 0.5em 0.1em 0.5em'};
+            margin: ${settings.metaSeparate ? settings.metaMargin : 0}px;
+        }
+
+        #log .message {
+            word-wrap: break-word;
+            width: ${settings.metaSeparate ? 'auto' : '65%'};
+            background: ${settings.metaSeparate ? rgba2css(settings.messageBackgroundColor) : 'none'};
+            border-style: ${settings.metaSeparate ? settings.messageBorderStyle : 'none'};
+            border-color: ${rgba2css(settings.messageBorderColor)};
+            border-width: ${settings.messageBorderWidth}px;
+            border-radius: ${settings.messageBorderRadius}px;
+            padding: ${settings.metaSeparate ? settings.messagePadding + 'px' : '0 0 0.1em 0'};
+            margin: ${settings.metaSeparate ? settings.messageMargin : 0}px;
+        }
+
+        .badge {
+            display: inline-block;
+            margin-right: 0.2em;
+            position: relative;
+            height: 1em;
+            vertical-align: middle;
+            top: -0.1em;
+        }
+
+        .name {
+            margin-left: 0.2em;
+        }
+
+        @keyframes fadeInRight {
+            0% {
                 opacity: 0;
+                -webkit-transform: translate3d(100%,0,0);
+                transform: translate3d(100%,0,0);
             }
-            
-            #log .message,#log .meta {
-                vertical-align: top;
-                display: ${settings.nameSeparate ? 'inline-block' : 'table-cell'};
-                padding-bottom: 0.1em;
+            100% {
+                opacity: 1;
+                -webkit-transform: none;
+                transform: none;
             }
-            
-            #log .meta {
-                width: ${settings.nameSeparate ? 'fit-content' : '35%'};
-                margin-right: ${settings.nameSeparate ? 'auto' : '0'};
-                background: ${rgba2string(settings.nameBackgroundColor)};
-                text-align: right;
-                padding-right: 0.5em;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-                overflow: hidden;
-                position: ${settings.nameSeparate ? 'relative' : 'static'};
-                text-align: ${settings.nameSeparate ? 'left' : 'right'};
-                top: ${settings.nameTop}px;
-                left: ${settings.nameLeft}px;
-                border-width: ${settings.nameSeparate ? settings.nameBorderWidth + 'px' : settings.nameBorderWidth + 'px 0 ' + settings.nameBorderWidth + 'px ' + settings.nameBorderWidth + 'px'};
-                border-style: ${settings.nameBorderStyle};
-                border-color: ${rgba2string(settings.nameBorderColor)};
-                border-radius: ${settings.nameSeparate ? settings.nameBorderRadius + 'px' : settings.nameBorderRadius + 'px 0 0 ' + settings.nameBorderRadius + 'px'};
-            }
-            
-            #log .message {
-                word-wrap: break-word;
-                display: ${settings.nameSeparate ? 'inline-block' : 'table-cell'};
-                width: ${settings.nameSeparate ? 'auto' : '65%'};
-                background: ${settings.nameSeparate ? rgba2string(settings.messageBackgroundColor) : rgba2string(settings.nameBackgroundColor)};
-                border-width: ${settings.nameSeparate ? settings.messageBorderWidth + 'px' : settings.nameBorderWidth + 'px ' + settings.nameBorderWidth + 'px ' + settings.nameBorderWidth + 'px 0'};
-                border-style: ${settings.nameSeparate ? settings.messageBorderStyle : settings.nameBorderStyle};
-                border-color: ${settings.nameSeparate ? rgba2string(settings.messageBorderColor) : rgba2string(settings.nameBorderColor)};
-                border-radius: ${settings.nameSeparate ? settings.messageBorderRadius + 'px' : '0 ' + settings.nameBorderRadius + 'px ' + settings.nameBorderRadius + 'px 0'};
-            }
-            
-            .badge {
-                display: inline-block;
-                margin-right: 0.2em;
-                text_color    margin-left: 0.2em;
-            }
+        } 
+
+        @keyframes fadeOut {
+            0% {opacity:1;}
+            100% {opacity:0;}
+        }
         `
     )
 }

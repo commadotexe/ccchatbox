@@ -16,6 +16,8 @@ export const rgb2hex = (rgb : rgbColor) => {
     return(hex.toUpperCase());
 }
 
-export const rgba2string = (rgba: rgbaColor) => {
+export const rgba2css = (rgba: rgbaColor) => {
     return(`rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`);
 }
+
+export const clamp = (num: number, min: number, max: number) => Math.min(Math.max(num, min), max);

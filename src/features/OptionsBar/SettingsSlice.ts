@@ -8,20 +8,26 @@ export interface SettingsState {
   fontSize: number,
   messageHideDelay: number,
   animationDisabled: boolean,
-  nameSeparate: boolean,
-  nameTop: number,
-  nameLeft: number,
   textShadowDisabled: boolean,
-  nameBackgroundColor: rgbaColor,
+
+  metaSeparate: boolean,
+  metaBackgroundColor: rgbaColor,
+  metaBorderColor: rgbaColor,
+  metaBorderWidth: number,
+  metaBorderStyle: string,
+  metaBorderRadius: number,
+  metaPadding: number,
+  metaMargin: number,
+  metaTop: number,
+  metaLeft: number,
+
   messageBackgroundColor: rgbaColor,
-  nameBorderColor: rgbaColor,
-  nameBorderWidth: number,
-  nameBorderStyle: string,
-  nameBorderRadius: number,
   messageBorderColor: rgbaColor,
   messageBorderWidth: number,
   messageBorderStyle: string,
   messageBorderRadius: number,
+  messagePadding: number,
+  messageMargin: number,
 }
 
 const initialState: SettingsState = {
@@ -30,20 +36,26 @@ const initialState: SettingsState = {
     fontSize: 18,
     messageHideDelay: 15,
     animationDisabled: false,
-    nameSeparate: false,
-    nameTop: 0,
-    nameLeft: 0,
     textShadowDisabled: false,
-    nameBackgroundColor: {r: 0, g: 0, b: 0, a: 0.5},
+
+    metaSeparate: false,
+    metaBackgroundColor: {r: 0, g: 0, b: 0, a: 0.5},
+    metaBorderColor: {r: 126, g: 126, b: 126, a: 1},
+    metaBorderWidth: 1,
+    metaBorderStyle: 'none',
+    metaBorderRadius: 0,
+    metaPadding: 3,
+    metaMargin: 0,
+    metaTop: 0,
+    metaLeft: 0,
+
     messageBackgroundColor: {r: 0, g: 0, b: 0, a: 0.5},
-    nameBorderColor: {r: 126, g: 126, b: 126, a: 1},
-    nameBorderWidth: 1,
-    nameBorderStyle: 'none',
-    nameBorderRadius: 0,
     messageBorderColor: {r: 126, g: 126, b: 126, a: 1},
     messageBorderWidth: 1,
     messageBorderStyle: 'none',
     messageBorderRadius: 0,
+    messagePadding: 3,
+    messageMargin: 0,
 }
 
 export const settingsSlice = createSlice({
@@ -65,35 +77,43 @@ export const settingsSlice = createSlice({
     animationDisabled: (state, action: PayloadAction<boolean>) => {
       state.animationDisabled = action.payload;
     },
-    nameSeparate: (state, action: PayloadAction<boolean>) => {
-      state.nameSeparate = action.payload;
-    },
-    nameTop: (state, action: PayloadAction<number>) => {
-      state.nameTop = action.payload;
-    },
-    nameLeft: (state, action: PayloadAction<number>) => {
-      state.nameLeft = action.payload;
-    },
     textShadowDisabled: (state, action: PayloadAction<boolean>) => {
       state.textShadowDisabled = action.payload;
     },
-    nameBackgroundColor: (state, action: PayloadAction<rgbaColor>) => {
-      state.nameBackgroundColor = action.payload;
+
+    metaSeparate: (state, action: PayloadAction<boolean>) => {
+      state.metaSeparate = action.payload;
     },
+    metaBackgroundColor: (state, action: PayloadAction<rgbaColor>) => {
+      state.metaBackgroundColor = action.payload;
+    },
+    metaBorderColor: (state, action: PayloadAction<rgbaColor>) => {
+      state.metaBorderColor = action.payload;
+    },
+    metaBorderWidth: (state, action: PayloadAction<number>) => {
+      state.metaBorderWidth = action.payload;
+    },
+    metaBorderStyle: (state, action: PayloadAction<string>) => {
+      state.metaBorderStyle = action.payload;
+    },
+    metaBorderRadius: (state, action: PayloadAction<number>) => {
+      state.metaBorderRadius = action.payload;
+    },
+    metaPadding: (state, action: PayloadAction<number>) => {
+      state.metaPadding = action.payload;
+    },
+    metaMargin: (state, action: PayloadAction<number>) => {
+      state.metaMargin = action.payload;
+    },
+    metaTop: (state, action: PayloadAction<number>) => {
+      state.metaTop = action.payload;
+    },
+    metaLeft: (state, action: PayloadAction<number>) => {
+      state.metaLeft = action.payload;
+    },
+
     messageBackgroundColor: (state, action: PayloadAction<rgbaColor>) => {
       state.messageBackgroundColor = action.payload;
-    },
-    nameBorderColor: (state, action: PayloadAction<rgbaColor>) => {
-      state.nameBorderColor = action.payload;
-    },
-    nameBorderWidth: (state, action: PayloadAction<number>) => {
-      state.nameBorderWidth = action.payload;
-    },
-    nameBorderStyle: (state, action: PayloadAction<string>) => {
-      state.nameBorderStyle = action.payload;
-    },
-    nameBorderRadius: (state, action: PayloadAction<number>) => {
-      state.nameBorderRadius = action.payload;
     },
     messageBorderColor: (state, action: PayloadAction<rgbaColor>) => {
       state.messageBorderColor = action.payload;
@@ -106,6 +126,12 @@ export const settingsSlice = createSlice({
     },
     messageBorderRadius: (state, action: PayloadAction<number>) => {
       state.messageBorderRadius = action.payload;
+    },
+    messagePadding: (state, action: PayloadAction<number>) => {
+      state.messagePadding = action.payload;
+    },
+    messageMargin: (state, action: PayloadAction<number>) => {
+      state.messageMargin = action.payload;
     },
   },
 })

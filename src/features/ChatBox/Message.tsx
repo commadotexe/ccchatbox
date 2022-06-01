@@ -1,5 +1,5 @@
 import { useAppSelector } from '../../hooks';
-import { rgba2string } from '../../helpers';
+import { rgba2css } from '../../helpers';
 import type * as CSS from 'csstype';
 import './Message.scss'
 
@@ -14,35 +14,43 @@ const Message = (props: MessageProps) => {
     const settings = useAppSelector((state) => state.settings);
 
     const wrapperStyle: CSS.Properties = {
-        animation: `${settings.animationDisabled ? '' : 'fadeInRight .3s ease forwards'}, fadeOut 0.5s ease ${settings.messageHideDelay === 0 ? 999999999 : settings.messageHideDelay}s forwards`,
-        WebkitAnimation: `${settings.animationDisabled ? '' : 'fadeInRight .3s ease forwards'}, fadeOut 0.5s ease ${settings.messageHideDelay === 0 ? 999999999 : settings.messageHideDelay}s forwards`,
-        display: settings.nameSeparate ? 'block' : 'table-row',
+        flexDirection: settings.metaSeparate ? 'column' : 'row',
+        animation: `${settings.animationDisabled ? '' : 'fadeInRight .3s ease forwards, '}fadeOut 0.5s ease ${settings.messageHideDelay === 0 ? 999999999 : settings.messageHideDelay}s forwards`,
+        WebkitAnimation: `${settings.animationDisabled ? '' : 'fadeInRight .3s ease forwards, '}fadeOut 0.5s ease ${settings.messageHideDelay === 0 ? 999999999 : settings.messageHideDelay}s forwards`,
+        background: settings.metaSeparate ? 'none' : rgba2css(settings.messageBackgroundColor),
+        borderStyle: settings.metaSeparate ? 'none' : settings.messageBorderStyle,
+        borderColor: rgba2css(settings.messageBorderColor),
+        borderWidth: `${settings.messageBorderWidth}px`,
+        borderRadius: `${settings.messageBorderRadius}px`,
+        padding: `${settings.metaSeparate ? 0 : settings.messagePadding}px`,
+        margin: `${settings.metaSeparate ? 0 : settings.messageMargin}px`,
     }
 
     const metaStyle: CSS.Properties = {
         color: props.color,
-        display: settings.nameSeparate ? 'block' : 'table-cell',
-        marginRight: settings.nameSeparate ? 'auto' : '0',
-        width: settings.nameSeparate ? 'fit-content' : '35%',
-        position: settings.nameSeparate ? 'relative' : 'static',
-        textAlign: settings.nameSeparate ? 'left' : 'right',
-        top: `${settings.nameTop}px`,
-        left: `${settings.nameLeft}px`,
-        background: rgba2string(settings.nameBackgroundColor),
-        borderWidth: `${settings.nameSeparate ? settings.nameBorderWidth + 'px' : settings.nameBorderWidth + 'px 0 ' + settings.nameBorderWidth + 'px ' + settings.nameBorderWidth + 'px'}`,
-        borderStyle: settings.nameBorderStyle,
-        borderColor: rgba2string(settings.nameBorderColor),
-        borderRadius: `${settings.nameSeparate ? settings.nameBorderRadius + 'px' : settings.nameBorderRadius + 'px 0 0 ' + settings.nameBorderRadius + 'px'}`,
+        width: settings.metaSeparate ? 'fit-content' : '35%',
+        position: settings.metaSeparate ? 'relative' : 'static',
+        textAlign: settings.metaSeparate ? 'left' : 'right',
+        top: `${settings.metaTop}px`,
+        left: `${settings.metaLeft}px`,
+        background: settings.metaSeparate ? rgba2css(settings.metaBackgroundColor) : 'none',
+        borderStyle: settings.metaSeparate ? settings.metaBorderStyle : 'none',
+        borderColor: rgba2css(settings.metaBorderColor),
+        borderWidth: `${settings.metaBorderWidth}px`,
+        borderRadius: `${settings.metaBorderRadius}px`,
+        padding: `${settings.metaSeparate ? settings.metaPadding + 'px' : '0 0.5em 0.1em 0.5em'}`,
+        margin: `${settings.metaSeparate ? settings.metaMargin : 0}px`,
     }
 
     const messageStyle: CSS.Properties = {
-        display: settings.nameSeparate ? 'inline-block' : 'table-cell',
-        width: settings.nameSeparate ? 'auto' : '65%',
-        background: settings.nameSeparate ? rgba2string(settings.messageBackgroundColor) : rgba2string(settings.nameBackgroundColor),
-        borderWidth: `${settings.nameSeparate ? settings.messageBorderWidth + 'px' : settings.nameBorderWidth + 'px ' + settings.nameBorderWidth + 'px ' + settings.nameBorderWidth + 'px 0'}`,
-        borderStyle: settings.nameSeparate ? settings.messageBorderStyle : settings.nameBorderStyle,
-        borderColor: settings.nameSeparate ? rgba2string(settings.messageBorderColor) : rgba2string(settings.nameBorderColor),
-        borderRadius: `${settings.nameSeparate ? settings.messageBorderRadius + 'px' : '0 ' + settings.nameBorderRadius + 'px ' + settings.nameBorderRadius + 'px 0'}`,
+        width: settings.metaSeparate ? 'auto' : '65%',
+        background: settings.metaSeparate ? rgba2css(settings.messageBackgroundColor) : 'none',
+        borderStyle: settings.metaSeparate ? settings.messageBorderStyle : 'none',
+        borderColor: rgba2css(settings.messageBorderColor),
+        borderWidth: `${settings.messageBorderWidth}px`,
+        borderRadius: `${settings.messageBorderRadius}px`,
+        padding: `${settings.metaSeparate ? settings.messagePadding + 'px' : '0 0 0.1em 0'}`,
+        margin: `${settings.metaSeparate ? settings.messageMargin : 0}px`,
     }
 
     return (

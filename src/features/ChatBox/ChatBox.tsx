@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../hooks';
+import { rgba2css } from '../../helpers';
 import type * as CSS from 'csstype';
 import './ChatBox.scss'
 
@@ -12,24 +13,17 @@ const ChatBox = () => {
     const [messages, setMessages] = useState([]);
 
     useEffect(() => {
-        setMessages((old) => [...old, testMesages[Math.floor(Math.random()*testMesages.length)]]);
-        setMessages((old) => [...old, testMesages[Math.floor(Math.random()*testMesages.length)]]);
-        setMessages((old) => [...old, testMesages[Math.floor(Math.random()*testMesages.length)]]);
-        setMessages((old) => [...old, testMesages[Math.floor(Math.random()*testMesages.length)]]);
-        setMessages((old) => [...old, testMesages[Math.floor(Math.random()*testMesages.length)]]);
-        setMessages((old) => [...old, testMesages[Math.floor(Math.random()*testMesages.length)]]);
-        // const interval = setInterval(() => {
-        //     setMessages((old) => [...old, testMesages[Math.floor(Math.random()*testMesages.length)]]);
-        // }, 3000);
-        // return () => clearInterval(interval);
+        const interval = setInterval(() => {
+            setMessages((old) => [...old, testMesages[Math.floor(Math.random()*testMesages.length)]]);
+        }, 3000);
+        return () => clearInterval(interval);
       }, []);
 
     const chatBoxStyle: CSS.Properties = {
         background: `rgba(${settings.backgroundColor.r}, ${settings.backgroundColor.g}, ${settings.backgroundColor.b}, ${settings.backgroundColor.a})`,
-        color: `rgba(${settings.textColor.r}, ${settings.textColor.g}, ${settings.textColor.b}, ${settings.textColor.a})`,
+        color: `${rgba2css(settings.textColor)}`,
         fontSize: `${settings.fontSize}px`,
         textShadow: `${settings.textShadowDisabled ? 'none' : '0 0 1px #000, 0 0 2px #000'}`,
-        borderCollapse: 'separate',
     }
 
     return (

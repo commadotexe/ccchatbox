@@ -10,6 +10,7 @@ import './OptionsBar.scss';
 
 const OptionsBar = () => {
     const checkoutShown = useAppSelector((state) => state.checkout.show);
+    const metaSeparate = useAppSelector((state) => state.settings.metaSeparate);
     const dispatch = useAppDispatch();
 
     const handleClickShow = (format: string) => {
@@ -22,10 +23,10 @@ const OptionsBar = () => {
     }
 
     return (
-        <section>
+        <section className='options-bar'>
             <GroupWrapper title='Important'>
                 <RowWrapper title='Name separate' tooltip={true} tooltipText="Separate chatter's name from message text and put it on top.">
-                    <Toggle selector='nameSeparate'/>
+                    <Toggle selector='metaSeparate'/>
                 </RowWrapper>
                 <RowWrapper title='Disable animation' tooltip={false}>
                     <Toggle selector='animationDisabled'/>
@@ -44,45 +45,21 @@ const OptionsBar = () => {
                 </RowWrapper>
             </GroupWrapper>
 
-            <GroupWrapper title='Chatter name'>
-                <RowWrapper title='Border width' tooltip={true} tooltipText="Affects the whole message when 'Name separate' option is disabled.">
-                    <Slider min={0} max={42} measure='px'  selector='nameBorderWidth'/>
-                </RowWrapper>
-                <RowWrapper title='Border radius' tooltip={true} tooltipText="Affects the whole message when 'Name separate' option is disabled.">
-                    <Slider min={0} max={42} measure='px'  selector='nameBorderRadius'/>
-                </RowWrapper>
-                <RowWrapper title='Border style' tooltip={true} tooltipText="Affects the whole message when 'Name separate' option is disabled.">
-                    <Select options={['none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset']} selector='nameBorderStyle'/>
-                </RowWrapper>
-                <RowWrapper title='Border color' tooltip={true} tooltipText="Affects the whole message when 'Name separate' option is disabled.">
-                    <ColorPicker selector='nameBorderColor'/>
-                </RowWrapper>
-                <RowWrapper title='Background color' tooltip={true} tooltipText="Affects the whole message when 'Name separate' option is disabled.">
-                    <ColorPicker selector='nameBackgroundColor'/>
-                </RowWrapper>
-                <RowWrapper title='Top position' tooltip={true} tooltipText="For when 'Name separate' is enabled. Move the name up(negative number) and down(positive number).">
-                    <NumberInput selector='nameTop'/>
-                </RowWrapper>
-                <RowWrapper title='Left position' tooltip={true} tooltipText="For when 'Name separate' is enabled. Move the name left(negative number) and right(positive number).">
-                    <NumberInput selector='nameLeft'/>
-                </RowWrapper>
-            </GroupWrapper>
-
             <GroupWrapper title='Message'>
-            <RowWrapper title='Border width' tooltip={true} tooltipText="Only works when 'Name separate' option is enabled.">
-                    <Slider min={0} max={42} measure='px'  selector='messageBorderWidth'/>
+                <RowWrapper title='Background color' tooltip={false}>
+                    <ColorPicker selector='messageBackgroundColor'/>
                 </RowWrapper>
-                <RowWrapper title='Border radius' tooltip={true} tooltipText="Only works when 'Name separate' option is enabled.">
-                    <Slider min={0} max={42} measure='px'  selector='messageBorderRadius'/>
-                </RowWrapper>
-                <RowWrapper title='Border style' tooltip={true} tooltipText="Only works when 'Name separate' option is enabled.">
+                <RowWrapper title='Border style' tooltip={false}>
                     <Select options={['none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset']} selector='messageBorderStyle'/>
                 </RowWrapper>
-                <RowWrapper title='Border color' tooltip={true} tooltipText="Only works when 'Name separate' option is enabled.">
+                <RowWrapper title='Border color' tooltip={false}>
                     <ColorPicker selector='messageBorderColor'/>
                 </RowWrapper>
-                <RowWrapper title='Background color' tooltip={true} tooltipText="Only works when 'Name separate' option is enabled.">
-                    <ColorPicker selector='messageBackgroundColor'/>
+                <RowWrapper title='Border width' tooltip={false}>
+                    <Slider min={0} max={42} measure='px'  selector='messageBorderWidth'/>
+                </RowWrapper>
+                <RowWrapper title='Border radius' tooltip={false}>
+                    <Slider min={0} max={42} measure='px'  selector='messageBorderRadius'/>
                 </RowWrapper>
                 <RowWrapper title='Text color' tooltip={false}>
                     <ColorPicker selector='textColor'/>
@@ -90,7 +67,43 @@ const OptionsBar = () => {
                 <RowWrapper title='Font size' tooltip={false}>
                     <Slider min={12} max={80} measure='px'  selector='fontSize'/>
                 </RowWrapper>
+                <RowWrapper title='Padding' tooltip={true} tooltipText="Space between the box's walls and the message inside it.">
+                    <Slider min={0} max={100} measure='px'  selector='messagePadding'/>
+                </RowWrapper>
+                <RowWrapper title='Margin' tooltip={true} tooltipText="Space between the box containing the message and other boxes.">
+                    <Slider min={0} max={100} measure='px'  selector='messageMargin'/>
+                </RowWrapper>
             </GroupWrapper>
+
+            {metaSeparate && <GroupWrapper title='Chatter name'>
+                <RowWrapper title='Background color' tooltip={false}>
+                    <ColorPicker selector='metaBackgroundColor'/>
+                </RowWrapper>
+                <RowWrapper title='Border style' tooltip={false}>
+                    <Select options={['none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset']} selector='metaBorderStyle'/>
+                </RowWrapper>
+                <RowWrapper title='Border color' tooltip={false}>
+                    <ColorPicker selector='metaBorderColor'/>
+                </RowWrapper>
+                <RowWrapper title='Border width' tooltip={false}>
+                    <Slider min={0} max={42} measure='px'  selector='metaBorderWidth'/>
+                </RowWrapper>
+                <RowWrapper title='Border radius' tooltip={false}>
+                    <Slider min={0} max={42} measure='px'  selector='metaBorderRadius'/>
+                </RowWrapper>
+                <RowWrapper title='Top position' tooltip={true} tooltipText="For when 'Name separate' is enabled. Move the name up(negative number) and down(positive number).">
+                    <NumberInput selector='metaTop'/>
+                </RowWrapper>
+                <RowWrapper title='Left position' tooltip={true} tooltipText="For when 'Name separate' is enabled. Move the name left(negative number) and right(positive number).">
+                    <NumberInput selector='metaLeft'/>
+                </RowWrapper>
+                <RowWrapper title='Padding' tooltip={true} tooltipText="Space between the box's walls and the message inside it.">
+                    <Slider min={0} max={100} measure='px'  selector='metaPadding'/>
+                </RowWrapper>
+                <RowWrapper title='Margin' tooltip={true} tooltipText="Space between the box containing the name and other boxes.">
+                    <Slider min={0} max={100} measure='px'  selector='metaMargin'/>
+                </RowWrapper>
+            </GroupWrapper>}
             
             <div className='checkout-buttons'>
                 { !checkoutShown && <button className='button' onClick={() => handleClickShow('css')}>Generate CSS</button> }
