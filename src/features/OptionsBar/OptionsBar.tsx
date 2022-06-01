@@ -35,7 +35,10 @@ const OptionsBar = () => {
                     <Toggle selector='textShadowDisabled'/>
                 </RowWrapper>
                 <RowWrapper title='Hide message after' tooltip={true} tooltipText='Set to 0s to never hide messages.'>
-                    <Slider min={0} max={120} measure='s'  selector='messageHideDelay'/>    
+                    <Slider min={1} max={120} measure='s'  selector='messageHideDelay'/>    
+                </RowWrapper>
+                <RowWrapper title='Always show messages' tooltip={false}>
+                    <Toggle selector='alwaysShowMessage'/>
                 </RowWrapper>
             </GroupWrapper>
 

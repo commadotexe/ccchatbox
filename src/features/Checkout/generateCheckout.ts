@@ -35,8 +35,8 @@ const generateCss = () => {
             display: flex;
             justify-content: flex-start;
             flex-direction: ${settings.metaSeparate ? 'column' : 'row'};
-            animation: ${settings.animationDisabled ? '' : 'fadeInRight .3s ease forwards'}, fadeOut 0.5s ease ${settings.messageHideDelay === 0 ? 999999999 : settings.messageHideDelay}s forwards;
-            webkit-animation: ${settings.animationDisabled ? '' : 'fadeInRight .3s ease forwards'}, fadeOut 0.5s ease ${settings.messageHideDelay === 0 ? 999999999 : settings.messageHideDelay}s forwards;
+            animation: ${settings.animationDisabled ? '' : 'fadeInRight .3s ease forwards'}, fadeOut 0.5s ease ${settings.alwaysShowMessage ? 999999999 : settings.messageHideDelay}s forwards;
+            webkit-animation: ${settings.animationDisabled ? '' : 'fadeInRight .3s ease forwards'}, fadeOut 0.5s ease ${settings.alwaysShowMessage ? 999999999 : settings.messageHideDelay}s forwards;
             background: ${settings.metaSeparate ? 'none' : rgba2css(settings.messageBackgroundColor)};
             border-style: ${settings.metaSeparate ? 'none' : settings.messageBorderStyle};
             border-color: ${rgba2css(settings.messageBorderColor)};

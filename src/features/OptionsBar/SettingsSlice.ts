@@ -7,6 +7,7 @@ export interface SettingsState {
   textColor: rgbaColor,
   fontSize: number,
   messageHideDelay: number,
+  alwaysShowMessage: boolean,
   animationDisabled: boolean,
   textShadowDisabled: boolean,
 
@@ -35,6 +36,7 @@ const initialState: SettingsState = {
     textColor: {r: 250, g: 250, b: 250, a: 1},
     fontSize: 18,
     messageHideDelay: 15,
+    alwaysShowMessage: false,
     animationDisabled: false,
     textShadowDisabled: false,
 
@@ -73,6 +75,9 @@ export const settingsSlice = createSlice({
     },
     messageHideDelay: (state, action: PayloadAction<number>) => {
       state.messageHideDelay = action.payload;
+    },
+    alwaysShowMessage: (state, action: PayloadAction<boolean>) => {
+      state.alwaysShowMessage = action.payload;
     },
     animationDisabled: (state, action: PayloadAction<boolean>) => {
       state.animationDisabled = action.payload;

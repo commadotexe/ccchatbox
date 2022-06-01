@@ -15,8 +15,8 @@ const Message = (props: MessageProps) => {
 
     const wrapperStyle: CSS.Properties = {
         flexDirection: settings.metaSeparate ? 'column' : 'row',
-        animation: `${settings.animationDisabled ? '' : 'fadeInRight .3s ease forwards, '}fadeOut 0.5s ease ${settings.messageHideDelay === 0 ? 999999999 : settings.messageHideDelay}s forwards`,
-        WebkitAnimation: `${settings.animationDisabled ? '' : 'fadeInRight .3s ease forwards, '}fadeOut 0.5s ease ${settings.messageHideDelay === 0 ? 999999999 : settings.messageHideDelay}s forwards`,
+        animation: `${settings.animationDisabled ? '' : 'fadeInRight .3s ease forwards, '}fadeOut 0.5s ease ${settings.alwaysShowMessage ? 999999999 : settings.messageHideDelay}s forwards`,
+        WebkitAnimation: `${settings.animationDisabled ? '' : 'fadeInRight .3s ease forwards, '}fadeOut 0.5s ease ${settings.alwaysShowMessage ? 999999999 : settings.messageHideDelay}s forwards`,
         background: settings.metaSeparate ? 'none' : rgba2css(settings.messageBackgroundColor),
         borderStyle: settings.metaSeparate ? 'none' : settings.messageBorderStyle,
         borderColor: rgba2css(settings.messageBorderColor),
