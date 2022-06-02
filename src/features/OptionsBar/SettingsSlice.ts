@@ -64,79 +64,79 @@ export const settingsSlice = createSlice({
   name: 'settings',
   initialState,
   reducers: {
-    backgroundColor: (state, action: PayloadAction<rgbaColor>) => {
-      state.backgroundColor = action.payload;
+    backgroundColor: (state, action: PayloadAction<rgbaColor | string>) => {
+      state.backgroundColor = (typeof action.payload === 'string') ? JSON.parse(action.payload) : action.payload;
     },
-    textColor: (state, action: PayloadAction<rgbaColor>) => {
-      state.textColor = action.payload;
+    textColor: (state, action: PayloadAction<rgbaColor | string>) => {
+      state.textColor = (typeof action.payload === 'string') ? JSON.parse(action.payload) : action.payload;
     },
-    fontSize: (state, action: PayloadAction<number>) => {
-      state.fontSize = action.payload;
+    fontSize: (state, action: PayloadAction<number | string>) => {
+      state.fontSize = (typeof action.payload === 'string') ? parseInt(action.payload) : action.payload;
     },
-    messageHideDelay: (state, action: PayloadAction<number>) => {
-      state.messageHideDelay = action.payload;
+    messageHideDelay: (state, action: PayloadAction<number | string>) => {
+      state.messageHideDelay = (typeof action.payload === 'string') ? parseInt(action.payload) : action.payload;
     },
-    alwaysShowMessage: (state, action: PayloadAction<boolean>) => {
-      state.alwaysShowMessage = action.payload;
+    alwaysShowMessage: (state, action: PayloadAction<boolean | string>) => {
+      state.alwaysShowMessage = (typeof action.payload === 'string') ? (action.payload === 'true') : action.payload;
     },
-    animationDisabled: (state, action: PayloadAction<boolean>) => {
-      state.animationDisabled = action.payload;
+    animationDisabled: (state, action: PayloadAction<boolean | string>) => {
+      state.animationDisabled = (typeof action.payload === 'string') ? (action.payload === 'true') : action.payload;
     },
-    textShadowDisabled: (state, action: PayloadAction<boolean>) => {
-      state.textShadowDisabled = action.payload;
+    textShadowDisabled: (state, action: PayloadAction<boolean | string>) => {
+      state.textShadowDisabled = (typeof action.payload === 'string') ? (action.payload === 'true') : action.payload;
     },
 
-    metaSeparate: (state, action: PayloadAction<boolean>) => {
-      state.metaSeparate = action.payload;
+    metaSeparate: (state, action: PayloadAction<boolean | string>) => {
+      state.metaSeparate = (typeof action.payload === 'string') ? (action.payload === 'true') : action.payload;
     },
-    metaBackgroundColor: (state, action: PayloadAction<rgbaColor>) => {
-      state.metaBackgroundColor = action.payload;
+    metaBackgroundColor: (state, action: PayloadAction<rgbaColor | string>) => {
+      state.metaBackgroundColor = (typeof action.payload === 'string') ? JSON.parse(action.payload) : action.payload;
     },
-    metaBorderColor: (state, action: PayloadAction<rgbaColor>) => {
-      state.metaBorderColor = action.payload;
+    metaBorderColor: (state, action: PayloadAction<rgbaColor | string>) => {
+      state.metaBorderColor = (typeof action.payload === 'string') ? JSON.parse(action.payload) : action.payload;
     },
-    metaBorderWidth: (state, action: PayloadAction<number>) => {
-      state.metaBorderWidth = action.payload;
+    metaBorderWidth: (state, action: PayloadAction<number | string>) => {
+      state.metaBorderWidth = (typeof action.payload === 'string') ? parseInt(action.payload) : action.payload;
     },
     metaBorderStyle: (state, action: PayloadAction<string>) => {
       state.metaBorderStyle = action.payload;
     },
-    metaBorderRadius: (state, action: PayloadAction<number>) => {
-      state.metaBorderRadius = action.payload;
+    metaBorderRadius: (state, action: PayloadAction<number | string>) => {
+      state.metaBorderRadius = (typeof action.payload === 'string') ? parseInt(action.payload) : action.payload;
     },
-    metaPadding: (state, action: PayloadAction<number>) => {
-      state.metaPadding = action.payload;
+    metaPadding: (state, action: PayloadAction<number | string>) => {
+      state.metaPadding = (typeof action.payload === 'string') ? parseInt(action.payload) : action.payload;
     },
-    metaMargin: (state, action: PayloadAction<number>) => {
-      state.metaMargin = action.payload;
+    metaMargin: (state, action: PayloadAction<number | string>) => {
+      state.metaMargin = (typeof action.payload === 'string') ? parseInt(action.payload) : action.payload;
     },
-    metaTop: (state, action: PayloadAction<number>) => {
-      state.metaTop = action.payload;
+    metaTop: (state, action: PayloadAction<number | string>) => {
+      state.metaTop = (typeof action.payload === 'string') ? parseInt(action.payload) : action.payload;
     },
-    metaLeft: (state, action: PayloadAction<number>) => {
-      state.metaLeft = action.payload;
+    metaLeft: (state, action: PayloadAction<number | string>) => {
+      state.metaLeft = (typeof action.payload === 'string') ? parseInt(action.payload) : action.payload;
     },
 
-    messageBackgroundColor: (state, action: PayloadAction<rgbaColor>) => {
-      state.messageBackgroundColor = action.payload;
+    messageBackgroundColor: (state, action: PayloadAction<rgbaColor | string>) => {
+      state.messageBackgroundColor = (typeof action.payload === 'string') ? JSON.parse(action.payload) : action.payload;
     },
-    messageBorderColor: (state, action: PayloadAction<rgbaColor>) => {
-      state.messageBorderColor = action.payload;
+    messageBorderColor: (state, action: PayloadAction<rgbaColor | string>) => {
+      state.messageBorderColor = (typeof action.payload === 'string') ? JSON.parse(action.payload) : action.payload;
     },
-    messageBorderWidth: (state, action: PayloadAction<number>) => {
-      state.messageBorderWidth = action.payload;
+    messageBorderWidth: (state, action: PayloadAction<number | string>) => {
+      state.messageBorderWidth = (typeof action.payload === 'string') ? parseInt(action.payload) : action.payload;
     },
     messageBorderStyle: (state, action: PayloadAction<string>) => {
       state.messageBorderStyle = action.payload;
     },
-    messageBorderRadius: (state, action: PayloadAction<number>) => {
-      state.messageBorderRadius = action.payload;
+    messageBorderRadius: (state, action: PayloadAction<number | string>) => {
+      state.messageBorderRadius = (typeof action.payload === 'string') ? parseInt(action.payload) : action.payload;
     },
-    messagePadding: (state, action: PayloadAction<number>) => {
-      state.messagePadding = action.payload;
+    messagePadding: (state, action: PayloadAction<number | string>) => {
+      state.messagePadding = (typeof action.payload === 'string') ? parseInt(action.payload) : action.payload;
     },
-    messageMargin: (state, action: PayloadAction<number>) => {
-      state.messageMargin = action.payload;
+    messageMargin: (state, action: PayloadAction<number | string>) => {
+      state.messageMargin = (typeof action.payload === 'string') ? parseInt(action.payload) : action.payload;
     },
   },
 })

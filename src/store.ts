@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import settingsReducer from './features/OptionsBar/SettingsSlice';
-import checkoutReducer from './features/Checkout/CheckoutSlice';
+import outputReducer from './features/ChatBox/OutputSlice'
 
 const store = configureStore({
   reducer: {
     settings: settingsReducer,
-    checkout: checkoutReducer,
+    output: outputReducer,
   },
 })
 

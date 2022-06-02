@@ -76,7 +76,7 @@
 }
 
 #log .message {
-    word-wrap: break-word;
+    overflow-wrap: anywhere;
     width: 65%;
 }
 

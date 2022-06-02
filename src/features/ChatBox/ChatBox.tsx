@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { rgba2css } from '../../helpers';
+import generateOutput from './generateOutput';
 import type * as CSS from 'csstype';
 import './ChatBox.scss'
 
@@ -9,6 +10,8 @@ import testMesages from './TestMessages';
 
 const ChatBox = () => {
     const settings = useAppSelector((state) => state.settings);
+    const output = useAppSelector((state) => state.output);
+    const dispatch = useAppDispatch();
 
     const [messages, setMessages] = useState([]);
 
@@ -18,6 +21,20 @@ const ChatBox = () => {
         }, 3000);
         return () => clearInterval(interval);
       }, []);
+
+    useEffect(() => {
+        if (output.outputTrigger) {
+            setMessages((old) => [...old, {name: 'comma', color: '#787878', message: generateOutput(output.format, settings)}]);
+            dispatch({type: `output/outputTrigger`, payload: false});
+        }
+    }, [output.outputTrigger]);
+
+    useEffect(() => {
+        if (output.copiedTrigger) {
+            setMessages((old) => [...old, {name: 'comma', color: '#787878', message: 'Copied!'}]);
+            dispatch({type: `output/copiedTrigger`, payload: false});
+        }
+    }, [output.copiedTrigger]);
 
     const chatBoxStyle: CSS.Properties = {
         background: `rgba(${settings.backgroundColor.r}, ${settings.backgroundColor.g}, ${settings.backgroundColor.b}, ${settings.backgroundColor.a})`,

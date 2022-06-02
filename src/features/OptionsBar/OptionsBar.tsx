@@ -4,22 +4,27 @@ import GroupWrapper from './GroupWrapper';
 import ColorPicker from './ColorPicker';
 import Slider from './Slider';
 import Toggle from './Toggle';
-import NumberInput from './NumberInput';
+import CycleButton from './CycleButton';
 import Select from './Select';
+import generateOutput from '../ChatBox/generateOutput';
+import { outputFormat } from '../ChatBox/OutputSlice';
 import './OptionsBar.scss';
+import { output } from '../../../webpack.config';
 
 const OptionsBar = () => {
-    const checkoutShown = useAppSelector((state) => state.checkout.show);
+    const settings = useAppSelector((state) => state.settings);
     const metaSeparate = useAppSelector((state) => state.settings.metaSeparate);
+    const output = useAppSelector((state) => state.output);
     const dispatch = useAppDispatch();
 
-    const handleClickShow = (format: string) => {
-        dispatch({type: 'checkout/show', payload: true});
-        dispatch({type: 'checkout/format', payload: format});
+    const triggerOutputMessage = (format: outputFormat) => {
+        dispatch({type: `output/outputTrigger`, payload: true});
+        dispatch({type: `output/format`, payload: format});
     }
 
-    const handleClickHide = () => {
-        dispatch({type: 'checkout/show', payload: false});
+    const outputToClipboard = () => {
+        navigator.clipboard.writeText(generateOutput(output.format, settings));
+        dispatch({type: `output/copiedTrigger`, payload: true});
     }
 
     return (
@@ -31,13 +36,13 @@ const OptionsBar = () => {
                 <RowWrapper title='Disable animation' tooltip={false}>
                     <Toggle selector='animationDisabled'/>
                 </RowWrapper>
-                <RowWrapper title='Disable text shadow' tooltip={true} tooltipText='Subtle dark outline around all text. Might become a hindrance with semi-transparent text colours.'>
+                <RowWrapper title='Disable text shadow' tooltip={true} tooltipText='Subtle dark outline around all text. Might become a hindrance with semi-transparent text colors.'>
                     <Toggle selector='textShadowDisabled'/>
                 </RowWrapper>
-                <RowWrapper title='Hide message after' tooltip={true} tooltipText='Set to 0s to never hide messages.'>
+                <RowWrapper title='Hide message after' tooltip={false}>
                     <Slider min={1} max={120} measure='s'  selector='messageHideDelay'/>    
                 </RowWrapper>
-                <RowWrapper title='Always show messages' tooltip={false}>
+                <RowWrapper title='Always show message' tooltip={false}>
                     <Toggle selector='alwaysShowMessage'/>
                 </RowWrapper>
             </GroupWrapper>
@@ -95,12 +100,12 @@ const OptionsBar = () => {
                     <Slider min={0} max={42} measure='px'  selector='metaBorderRadius'/>
                 </RowWrapper>
                 <RowWrapper title='Top position' tooltip={true} tooltipText="For when 'Name separate' is enabled. Move the name up(negative number) and down(positive number).">
-                    <NumberInput selector='metaTop'/>
+                    <Slider min={-60} max={120} measure='px'  selector='metaTop'/>
                 </RowWrapper>
                 <RowWrapper title='Left position' tooltip={true} tooltipText="For when 'Name separate' is enabled. Move the name left(negative number) and right(positive number).">
-                    <NumberInput selector='metaLeft'/>
+                    <Slider min={-60} max={120} measure='px'  selector='metaLeft'/>
                 </RowWrapper>
-                <RowWrapper title='Padding' tooltip={true} tooltipText="Space between the box's walls and the message inside it.">
+                <RowWrapper title='Padding' tooltip={true} tooltipText="Space between the box's walls and the name inside it.">
                     <Slider min={0} max={100} measure='px'  selector='metaPadding'/>
                 </RowWrapper>
                 <RowWrapper title='Margin' tooltip={true} tooltipText="Space between the box containing the name and other boxes.">
@@ -109,9 +114,9 @@ const OptionsBar = () => {
             </GroupWrapper>}
             
             <div className='checkout-buttons'>
-                { !checkoutShown && <button className='button' onClick={() => handleClickShow('css')}>Generate CSS</button> }
-                { !checkoutShown && <button className='button' onClick={() => handleClickShow('link')}>Generate Link</button> }
-                { checkoutShown && <button className='button' onClick={handleClickHide}>Show chat</button> }
+                <CycleButton states={[{label: 'Generate CSS', action: () => triggerOutputMessage('css')}, {label: 'Copy', action: outputToClipboard}]} />
+                <CycleButton states={[{label: 'Generate Standalone', action: () => triggerOutputMessage('standalone')}, {label: 'Copy', action: outputToClipboard}]} />
+                <CycleButton states={[{label: 'Save', action: () => triggerOutputMessage('save')}, {label: 'Copy', action: outputToClipboard}]} />
             </div>
         </section>
     )

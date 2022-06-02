@@ -17,7 +17,7 @@ const NumberInput = ({ selector }: NumberInputProps) => {
 
         if (!parsed) {
             setInputValue(event.target.value);
-            dispatch({type: `settings/${selector}`, payload: 0});    
+            dispatch({type: `settings/${selector}`, payload: 0});
         } else {
             setInputValue(parsed);
             dispatch({type: `settings/${selector}`, payload: parsed});    

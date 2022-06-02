@@ -1,13 +1,19 @@
 import { useAppSelector } from '../../hooks';
 import { rgba2css } from '../../helpers';
+import { outputFormat } from './OutputSlice';
 
-const generateCheckout = (format: string) => {
-    return (format == "css" ? generateCss() : generateLink());
+const generateOutput = (format: outputFormat, settings: any) => {
+    switch (format) {
+        case 'css':
+            return(generateCss(settings));
+        case 'standalone':
+            return(generateStandalone(settings));
+        case 'save':
+            return(generateSave(settings));
+    }
 }
 
-const generateCss = () => {
-    const settings = useAppSelector((state) => state.settings);
-
+const generateCss = (settings: any) => {
     return (
         `
         @import url(https://fonts.googleapis.com/css?family=Roboto:700);
@@ -106,7 +112,7 @@ const generateCss = () => {
         }
 
         #log .message {
-            word-wrap: break-word;
+            overflow-wrap: anywhere;
             width: ${settings.metaSeparate ? 'auto' : '65%'};
             background: ${settings.metaSeparate ? rgba2css(settings.messageBackgroundColor) : 'none'};
             border-style: ${settings.metaSeparate ? settings.messageBorderStyle : 'none'};
@@ -151,10 +157,21 @@ const generateCss = () => {
     )
 }
 
-const generateLink = () => {
-    const settings = useAppSelector((state) => state.settings);
-
-    return("Nothing to see here for now.")
+const generateStandalone = (settings: any) => {
+    return("Standalone mode isn't implemented yet.")
 }
 
-export default generateCheckout;
+const generateSave = (settings: any) => {
+    console.log('https://commadotexe.github.io/ccchatbox/?' + objectToUrlParams(settings));
+    return('https://commadotexe.github.io/ccchatbox/?' + objectToUrlParams(settings));
+}
+
+const objectToUrlParams = (obj: any) => {
+    const ret = Object.entries(obj).map(([key, value]) => {
+        const val = typeof value === 'object' ? JSON.stringify(value) : value;
+        return(`${key}=${val}`);
+    }).join('&');
+    return(ret);
+}
+
+export default generateOutput;

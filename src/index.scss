@@ -16,7 +16,7 @@ main {
     justify-content: space-evenly;
 }
 
-.button {
+button {
     background-color: #fff;
     border: 2px solid #bdc2c4;
     color: #000;
@@ -26,6 +26,7 @@ main {
     text-align: center;
     text-decoration: none;
     transition: all 0.3s;
+    cursor: pointer;
 
     &:hover {
         background-color: #bdc2c4;

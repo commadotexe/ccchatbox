@@ -2,7 +2,9 @@
     font-size: 18px;
 
     &__title {
+        width: fit-content;
         margin-top: 5px;
+        cursor: pointer;
 
         &--open::after {
             content: '';
