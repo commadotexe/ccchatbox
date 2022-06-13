@@ -164,7 +164,7 @@ const generateCss = (settings: any) => {
 }
 
 const generateStandalone = (settings: any) => {
-    return('https://commadotexe.github.io/ccchatbox/?' + objectToUrlParams(settings));
+    return('https://commadotexe.github.io/ccchatbox/#/standalone/?' + objectToUrlParams(settings));
 }
 
 const generateSave = (settings: any) => {
