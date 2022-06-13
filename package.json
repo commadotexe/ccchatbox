@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "start": "webpack serve --open"
+    "start": "webpack serve --open",
+    "postinstall": "npm update tmi-emote-parse"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +15,7 @@
   "devDependencies": {
     "@types/react": "^18.0.6",
     "@types/react-dom": "^18.0.2",
+    "@types/tmi.js": "^1.8.1",
     "css-loader": "^6.7.1",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.6.0",
@@ -32,6 +34,9 @@
     "react": "^18.0.0",
     "react-colorful": "^5.5.1",
     "react-dom": "^18.0.0",
-    "react-redux": "^8.0.1"
+    "react-redux": "^8.0.1",
+    "react-router-dom": "^6.3.0",
+    "tmi-emote-parse": "github:commadotexe/tmi-emote-parse",
+    "tmi.js": "^1.8.5"
   }
 }

@@ -1,0 +1,13 @@
+.typing-input {
+    height: 30px;
+    width: 200px;
+    padding: 1px 6px;
+    box-sizing: border-box;
+    border: 1px solid #3f3f3f;
+    border-radius: 6px;
+
+    &:focus {
+        outline: none;
+        margin: 0;
+    }
+}

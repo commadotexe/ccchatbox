@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../../store';
-import { rgbaColor } from '../../helpers';
+import { rgbaColor } from '../../utils/helpers';
 
 export interface SettingsState {
+  twitchUsername: string | null,
   backgroundColor: rgbaColor,
   textColor: rgbaColor,
   fontSize: number,
@@ -17,6 +18,10 @@ export interface SettingsState {
   metaBorderWidth: number,
   metaBorderStyle: string,
   metaBorderRadius: number,
+  metaBorderTop: boolean,
+  metaBorderRight: boolean,
+  metaBorderBottom: boolean,
+  metaBorderLeft: boolean,
   metaPadding: number,
   metaMargin: number,
   metaTop: number,
@@ -27,11 +32,16 @@ export interface SettingsState {
   messageBorderWidth: number,
   messageBorderStyle: string,
   messageBorderRadius: number,
+  messageBorderTop: boolean,
+  messageBorderRight: boolean,
+  messageBorderBottom: boolean,
+  messageBorderLeft: boolean,
   messagePadding: number,
   messageMargin: number,
 }
 
 const initialState: SettingsState = {
+    twitchUsername: null,
     backgroundColor: {r: 0, g: 0, b: 0, a: 1},
     textColor: {r: 250, g: 250, b: 250, a: 1},
     fontSize: 18,
@@ -46,6 +56,10 @@ const initialState: SettingsState = {
     metaBorderWidth: 1,
     metaBorderStyle: 'none',
     metaBorderRadius: 0,
+    metaBorderTop: true,
+    metaBorderRight: true,
+    metaBorderBottom: true,
+    metaBorderLeft: true,
     metaPadding: 3,
     metaMargin: 0,
     metaTop: 0,
@@ -56,6 +70,10 @@ const initialState: SettingsState = {
     messageBorderWidth: 1,
     messageBorderStyle: 'none',
     messageBorderRadius: 0,
+    messageBorderTop: true,
+    messageBorderRight: true,
+    messageBorderBottom: true,
+    messageBorderLeft: true,
     messagePadding: 3,
     messageMargin: 0,
 }
@@ -84,6 +102,9 @@ export const settingsSlice = createSlice({
     },
     textShadowDisabled: (state, action: PayloadAction<boolean | string>) => {
       state.textShadowDisabled = (typeof action.payload === 'string') ? (action.payload === 'true') : action.payload;
+    },
+    twitchUsername: (state, action: PayloadAction<string | null>) => {
+      state.twitchUsername = action.payload;
     },
 
     metaSeparate: (state, action: PayloadAction<boolean | string>) => {
@@ -116,6 +137,18 @@ export const settingsSlice = createSlice({
     metaLeft: (state, action: PayloadAction<number | string>) => {
       state.metaLeft = (typeof action.payload === 'string') ? parseInt(action.payload) : action.payload;
     },
+    metaBorderTop: (state, action: PayloadAction<boolean | string>) => {
+      state.metaBorderTop = (typeof action.payload === 'string') ? (action.payload === 'true') : action.payload;
+    },
+    metaBorderRight: (state, action: PayloadAction<boolean | string>) => {
+      state.metaBorderRight = (typeof action.payload === 'string') ? (action.payload === 'true') : action.payload;
+    },
+    metaBorderBottom: (state, action: PayloadAction<boolean | string>) => {
+      state.metaBorderBottom = (typeof action.payload === 'string') ? (action.payload === 'true') : action.payload;
+    },
+    metaBorderLeft: (state, action: PayloadAction<boolean | string>) => {
+      state.metaBorderLeft = (typeof action.payload === 'string') ? (action.payload === 'true') : action.payload;
+    },
 
     messageBackgroundColor: (state, action: PayloadAction<rgbaColor | string>) => {
       state.messageBackgroundColor = (typeof action.payload === 'string') ? JSON.parse(action.payload) : action.payload;
@@ -137,6 +170,18 @@ export const settingsSlice = createSlice({
     },
     messageMargin: (state, action: PayloadAction<number | string>) => {
       state.messageMargin = (typeof action.payload === 'string') ? parseInt(action.payload) : action.payload;
+    },
+    messageBorderTop: (state, action: PayloadAction<boolean | string>) => {
+      state.messageBorderTop = (typeof action.payload === 'string') ? (action.payload === 'true') : action.payload;
+    },
+    messageBorderRight: (state, action: PayloadAction<boolean | string>) => {
+      state.messageBorderRight = (typeof action.payload === 'string') ? (action.payload === 'true') : action.payload;
+    },
+    messageBorderBottom: (state, action: PayloadAction<boolean | string>) => {
+      state.messageBorderBottom = (typeof action.payload === 'string') ? (action.payload === 'true') : action.payload;
+    },
+    messageBorderLeft: (state, action: PayloadAction<boolean | string>) => {
+      state.messageBorderLeft = (typeof action.payload === 'string') ? (action.payload === 'true') : action.payload;
     },
   },
 })

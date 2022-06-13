@@ -1,5 +1,5 @@
 import { useAppSelector } from '../../hooks';
-import { rgba2css } from '../../helpers';
+import { rgba2css } from '../../utils/helpers';
 import type * as CSS from 'csstype';
 import './Message.scss'
 
@@ -20,7 +20,10 @@ const Message = (props: MessageProps) => {
         background: settings.metaSeparate ? 'none' : rgba2css(settings.messageBackgroundColor),
         borderStyle: settings.metaSeparate ? 'none' : settings.messageBorderStyle,
         borderColor: rgba2css(settings.messageBorderColor),
-        borderWidth: `${settings.messageBorderWidth}px`,
+        borderWidth: `  ${settings.messageBorderWidth * (settings.messageBorderTop ? 1 : 0)}px 
+                        ${settings.messageBorderWidth * (settings.messageBorderRight ? 1 : 0)}px 
+                        ${settings.messageBorderWidth * (settings.messageBorderBottom ? 1 : 0)}px 
+                        ${settings.messageBorderWidth * (settings.messageBorderLeft ? 1 : 0)}px`,
         borderRadius: `${settings.messageBorderRadius}px`,
         padding: `${settings.metaSeparate ? 0 : settings.messagePadding}px`,
         margin: `${settings.metaSeparate ? 0 : settings.messageMargin}px`,
@@ -36,18 +39,24 @@ const Message = (props: MessageProps) => {
         background: settings.metaSeparate ? rgba2css(settings.metaBackgroundColor) : 'none',
         borderStyle: settings.metaSeparate ? settings.metaBorderStyle : 'none',
         borderColor: rgba2css(settings.metaBorderColor),
-        borderWidth: `${settings.metaBorderWidth}px`,
+        borderWidth: `  ${settings.metaBorderWidth * (settings.metaBorderTop ? 1 : 0)}px 
+                        ${settings.metaBorderWidth * (settings.metaBorderRight ? 1 : 0)}px 
+                        ${settings.metaBorderWidth * (settings.metaBorderBottom ? 1 : 0)}px 
+                        ${settings.metaBorderWidth * (settings.metaBorderLeft ? 1 : 0)}px`,
         borderRadius: `${settings.metaBorderRadius}px`,
         padding: `${settings.metaSeparate ? settings.metaPadding + 'px' : '0 0.5em 0.1em 0.5em'}`,
         margin: `${settings.metaSeparate ? settings.metaMargin : 0}px`,
     }
 
     const messageStyle: CSS.Properties = {
-        width: settings.metaSeparate ? 'auto' : '65%',
+        width: settings.metaSeparate ? 'fit-content' : '65%',
         background: settings.metaSeparate ? rgba2css(settings.messageBackgroundColor) : 'none',
         borderStyle: settings.metaSeparate ? settings.messageBorderStyle : 'none',
         borderColor: rgba2css(settings.messageBorderColor),
-        borderWidth: `${settings.messageBorderWidth}px`,
+        borderWidth: `  ${settings.messageBorderWidth * (settings.messageBorderTop ? 1 : 0)}px 
+                        ${settings.messageBorderWidth * (settings.messageBorderRight ? 1 : 0)}px 
+                        ${settings.messageBorderWidth * (settings.messageBorderBottom ? 1 : 0)}px 
+                        ${settings.messageBorderWidth * (settings.messageBorderLeft ? 1 : 0)}px`,
         borderRadius: `${settings.messageBorderRadius}px`,
         padding: `${settings.metaSeparate ? settings.messagePadding + 'px' : '0 0 0.1em 0'}`,
         margin: `${settings.metaSeparate ? settings.messageMargin : 0}px`,
@@ -64,9 +73,7 @@ const Message = (props: MessageProps) => {
                 <span className='name'>{props.name}</span>
             </span>
 
-            <span className='message' style={messageStyle}>
-                {props.message}
-            </span>
+            <span className='message' style={messageStyle} dangerouslySetInnerHTML={{__html: props.message}}></span>
         </div>
     )
 }

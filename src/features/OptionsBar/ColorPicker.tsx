@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { RgbaColorPicker } from 'react-colorful';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { SettingsState } from './SettingsSlice';
-import { rgbaColor, clamp, rgba2css } from '../../helpers';
+import { rgbaColor, clamp, rgba2css } from '../../utils/helpers';
 import './ColorPicker.scss';
 
 type ColorPickerProps = {
@@ -18,7 +18,7 @@ const ColorPicker = ({ selector }: ColorPickerProps) => {
     const handleChangeInput = (e: any) => {
         const c = e.target.value;
         if (/^r:[\d]{1,3} g:[\d]{1,3} b:[\d]{1,3} a:(0\.)?[\d]{1,3}$/.test(c)) {
-            dispatch({type: `settings/${selector}`, payload: {r: parseInt(c.match(/r:([\d]{1,3})/)[1]), g: parseInt(c.match(/g:([\d]{1,3})/)[1]), b: parseInt(c.match(/b:([\d]{1,3})/)[1]), a: clamp(parseFloat(c.match(/a:((0\.)?[\d]{1,3})/)[1]), 0, 1)}});
+            dispatch({type: `settings/${selector}`, payload: {r: clamp(parseInt(c.match(/r:([\d]{1,3})/)[1]), 0, 255), g: clamp(parseInt(c.match(/g:([\d]{1,3})/)[1]), 0, 255), b: clamp(parseInt(c.match(/b:([\d]{1,3})/)[1]), 0, 255), a: clamp(parseFloat(c.match(/a:((0\.)?[\d]{1,3})/)[1]), 0, 1)}});
             setInputColor(c);
         } else if (/^r:[\d]{0,3} g:[\d]{0,3} b:[\d]{0,3} a:(0\.)?[\d]{0,3}$/.test(c)) {
             setInputColor(c);

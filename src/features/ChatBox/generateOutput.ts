@@ -1,5 +1,5 @@
 import { useAppSelector } from '../../hooks';
-import { rgba2css } from '../../helpers';
+import { rgba2css } from '../../utils/helpers';
 import { outputFormat } from './OutputSlice';
 
 const generateOutput = (format: outputFormat, settings: any) => {
@@ -105,7 +105,10 @@ const generateCss = (settings: any) => {
             background: ${settings.metaSeparate ? rgba2css(settings.metaBackgroundColor) : 'none'};
             border-style: ${settings.metaSeparate ? settings.metaBorderStyle : 'none'};
             border-color: ${rgba2css(settings.metaBorderColor)};
-            border-width: ${settings.metaBorderWidth}px;
+            border-width:   ${settings.metaBorderWidth * (settings.metaBorderTop ? 1 : 0)}px 
+                            ${settings.metaBorderWidth * (settings.metaBorderRight ? 1 : 0)}px 
+                            ${settings.metaBorderWidth * (settings.metaBorderBottom ? 1 : 0)}px 
+                            ${settings.metaBorderWidth * (settings.metaBorderLeft ? 1 : 0)}px;
             border-radius: ${settings.metaBorderRadius}px;
             padding: ${settings.metaSeparate ? settings.metaPadding + 'px' : '0 0.5em 0.1em 0.5em'};
             margin: ${settings.metaSeparate ? settings.metaMargin : 0}px;
@@ -113,11 +116,14 @@ const generateCss = (settings: any) => {
 
         #log .message {
             overflow-wrap: anywhere;
-            width: ${settings.metaSeparate ? 'auto' : '65%'};
+            width: ${settings.metaSeparate ? 'fit-content' : '65%'};
             background: ${settings.metaSeparate ? rgba2css(settings.messageBackgroundColor) : 'none'};
             border-style: ${settings.metaSeparate ? settings.messageBorderStyle : 'none'};
             border-color: ${rgba2css(settings.messageBorderColor)};
-            border-width: ${settings.messageBorderWidth}px;
+            border-width:   ${settings.messageBorderWidth * (settings.messageBorderTop ? 1 : 0)}px 
+                            ${settings.messageBorderWidth * (settings.messageBorderRight ? 1 : 0)}px 
+                            ${settings.messageBorderWidth * (settings.messageBorderBottom ? 1 : 0)}px 
+                            ${settings.messageBorderWidth * (settings.messageBorderLeft ? 1 : 0)}px
             border-radius: ${settings.messageBorderRadius}px;
             padding: ${settings.metaSeparate ? settings.messagePadding + 'px' : '0 0 0.1em 0'};
             margin: ${settings.metaSeparate ? settings.messageMargin : 0}px;
@@ -158,11 +164,10 @@ const generateCss = (settings: any) => {
 }
 
 const generateStandalone = (settings: any) => {
-    return("Standalone mode isn't implemented yet.")
+    return('https://commadotexe.github.io/ccchatbox/?' + objectToUrlParams(settings));
 }
 
 const generateSave = (settings: any) => {
-    console.log('https://commadotexe.github.io/ccchatbox/?' + objectToUrlParams(settings));
     return('https://commadotexe.github.io/ccchatbox/?' + objectToUrlParams(settings));
 }
 
