@@ -11,6 +11,8 @@ export interface SettingsState {
   alwaysShowMessage: boolean,
   animationDisabled: boolean,
   textShadowDisabled: boolean,
+  hideBadges: boolean,
+  hideEmotes:boolean,
 
   metaSeparate: boolean,
   metaBackgroundColor: rgbaColor,
@@ -49,6 +51,8 @@ const initialState: SettingsState = {
     alwaysShowMessage: false,
     animationDisabled: false,
     textShadowDisabled: false,
+    hideBadges: false,
+    hideEmotes: false,
 
     metaSeparate: false,
     metaBackgroundColor: {r: 0, g: 0, b: 0, a: 0.5},
@@ -82,6 +86,9 @@ export const settingsSlice = createSlice({
   name: 'settings',
   initialState,
   reducers: {
+    twitchUsername: (state, action: PayloadAction<string | null>) => {
+      state.twitchUsername = action.payload;
+    },
     backgroundColor: (state, action: PayloadAction<rgbaColor | string>) => {
       state.backgroundColor = (typeof action.payload === 'string') ? JSON.parse(action.payload) : action.payload;
     },
@@ -103,8 +110,11 @@ export const settingsSlice = createSlice({
     textShadowDisabled: (state, action: PayloadAction<boolean | string>) => {
       state.textShadowDisabled = (typeof action.payload === 'string') ? (action.payload === 'true') : action.payload;
     },
-    twitchUsername: (state, action: PayloadAction<string | null>) => {
-      state.twitchUsername = action.payload;
+    hideBadges: (state, action: PayloadAction<boolean | string>) => {
+      state.hideBadges = (typeof action.payload === 'string') ? (action.payload === 'true') : action.payload;
+    },
+    hideEmotes: (state, action: PayloadAction<boolean | string>) => {
+      state.hideEmotes = (typeof action.payload === 'string') ? (action.payload === 'true') : action.payload;
     },
 
     metaSeparate: (state, action: PayloadAction<boolean | string>) => {

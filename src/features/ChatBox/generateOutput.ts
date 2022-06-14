@@ -129,8 +129,12 @@ const generateCss = (settings: any) => {
             margin: ${settings.metaSeparate ? settings.messageMargin : 0}px;
         }
 
+        .emote {
+            display: ${settings.hideEmotes ? 'none' : 'inline'};
+        }
+
         .badge {
-            display: inline-block;
+            display: ${settings.hideBadges ? 'none' : 'inline-block'};
             margin-right: 0.2em;
             position: relative;
             height: 1em;

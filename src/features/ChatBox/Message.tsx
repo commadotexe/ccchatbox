@@ -62,12 +62,16 @@ const Message = (props: MessageProps) => {
         margin: `${settings.metaSeparate ? settings.messageMargin : 0}px`,
     }
 
+    const badgeStyle: CSS.Properties = {
+        display: settings.hideBadges ? 'none' : 'inline-block',
+    }
+
     return (
         <div data-from={props.name} data-id='' style={wrapperStyle}>
             <span className='meta' style={metaStyle}>
                 <span className='badges'>
                     {props.badges && props.badges.map((badge, index) =>
-                        <img key={index} src={badge} className='badge subscriber-icon'></img>
+                        <img key={index} src={badge} className='badge subscriber-icon' style={badgeStyle}></img>
                     )}
                 </span>
                 <span className='name'>{props.name}</span>

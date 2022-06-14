@@ -43,11 +43,17 @@ const OptionsBar = () => {
                 <RowWrapper title='Disable text shadow' tooltip={true} tooltipText='Subtle dark outline around all text. Might become a hindrance with semi-transparent text colors.'>
                     <Toggle selector='textShadowDisabled'/>
                 </RowWrapper>
-                <RowWrapper title='Hide message after' tooltip={false}>
+                <RowWrapper title='Hide message after' tooltip={true} tooltipText='Hides the message after chosen time. Toggle below overrides this.'>
                     <Slider min={1} max={120} measure='s'  selector='messageHideDelay'/>    
                 </RowWrapper>
                 <RowWrapper title='Always show message' tooltip={false}>
                     <Toggle selector='alwaysShowMessage'/>
+                </RowWrapper>
+                <RowWrapper title='Hide badges' tooltip={false}>
+                    <Toggle selector='hideBadges'/>
+                </RowWrapper>
+                <RowWrapper title='Hide emotes' tooltip={true} tooltipText='Hides emotes. Does not convert them back to text, just hides them.'>
+                    <Toggle selector='hideEmotes'/>
                 </RowWrapper>
             </GroupWrapper>
 

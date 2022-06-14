@@ -24,9 +24,9 @@ export const StandaloneChatBox = () => {
                 const user = await getUserByLogin(settings.twitchUsername);
                 const globalBadges = await getGlobalBadges();
                 const channelBadges = await getChannelBadges(user.id);
-
                 const args = { 'bttv': {channel: true, global: true}, 'ffz': {channel: true, global: true}, '7tv': {channel: true, global: true} };
-                emoteParser.loadAssets(settings.twitchUsername, user.id, args);
+                await emoteParser.loadAssets(settings.twitchUsername, user.id, args);
+
                 setUser(user);
                 setBadges({...globalBadges, ...channelBadges});
             })();
@@ -41,7 +41,10 @@ export const StandaloneChatBox = () => {
 
             client.connect().catch(console.error);
             client.on('message', (channel, tags, message, self) => {
-                const parsedMessage = emoteParser.replaceEmotes(message, tags, channel, self);
+                let parsedMessage = emoteParser.replaceEmotes(message, tags, channel, self);
+                if (settings.hideEmotes) {
+                    parsedMessage = parsedMessage.replace(/<img[^>"']*((("[^"]*")|('[^']*'))[^"'>]*)*>/g,'');
+                }
                 let messageBadges = [] as String[];
                 if (tags.badges) {
                     for (let badge in tags.badges) {
