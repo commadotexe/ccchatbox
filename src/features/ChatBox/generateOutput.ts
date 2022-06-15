@@ -123,7 +123,7 @@ const generateCss = (settings: any) => {
             border-width:   ${settings.messageBorderWidth * (settings.messageBorderTop ? 1 : 0)}px 
                             ${settings.messageBorderWidth * (settings.messageBorderRight ? 1 : 0)}px 
                             ${settings.messageBorderWidth * (settings.messageBorderBottom ? 1 : 0)}px 
-                            ${settings.messageBorderWidth * (settings.messageBorderLeft ? 1 : 0)}px
+                            ${settings.messageBorderWidth * (settings.messageBorderLeft ? 1 : 0)}px;
             border-radius: ${settings.messageBorderRadius}px;
             padding: ${settings.metaSeparate ? settings.messagePadding + 'px' : '0 0 0.1em 0'};
             margin: ${settings.metaSeparate ? settings.messageMargin : 0}px;
@@ -168,6 +168,9 @@ const generateCss = (settings: any) => {
 }
 
 const generateStandalone = (settings: any) => {
+    if (!settings.twitchUsername) {
+        return("Please input your Twitch username in the 'Important' section. Standalone mode needs it to work properly.");
+    }
     return('https://commadotexe.github.io/ccchatbox/#/standalone/?' + objectToUrlParams(settings));
 }
 
