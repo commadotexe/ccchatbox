@@ -37,16 +37,16 @@ const OptionsBar = () => {
                 <RowWrapper title='Name separate' tooltip={true} tooltipText="Separate chatter's name from message text and put it on top.">
                     <Toggle selector='metaSeparate'/>
                 </RowWrapper>
-                <RowWrapper title='Disable animation' tooltip={false}>
+                <RowWrapper title='Disable animation' tooltip={true} tooltipText='Prevents message from sliding in from the right.'>
                     <Toggle selector='animationDisabled'/>
                 </RowWrapper>
                 <RowWrapper title='Disable text shadow' tooltip={true} tooltipText='Subtle dark outline around all text. Might become a hindrance with semi-transparent text colors.'>
                     <Toggle selector='textShadowDisabled'/>
                 </RowWrapper>
-                <RowWrapper title='Hide message after' tooltip={true} tooltipText='Hides the message after chosen time. Toggle below overrides this.'>
+                <RowWrapper title='Hide message after' tooltip={true} tooltipText='Hides the message after chosen time.'>
                     <Slider min={1} max={120} measure='s'  selector='messageHideDelay'/>    
                 </RowWrapper>
-                <RowWrapper title='Always show message' tooltip={false}>
+                <RowWrapper title='Always show message' tooltip={true} tooltipText="Always show the message. Overrides the 'Hide message after' option">
                     <Toggle selector='alwaysShowMessage'/>
                 </RowWrapper>
                 <RowWrapper title='Hide badges' tooltip={false}>
@@ -68,7 +68,7 @@ const OptionsBar = () => {
                     <ColorPicker selector='messageBackgroundColor'/>
                 </RowWrapper>
                 <RowWrapper title='Border style' tooltip={false}>
-                    <Select options={['none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset']} selector='messageBorderStyle'/>
+                    <Select options={['none', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset']} selector='messageBorderStyle'/>
                 </RowWrapper>
                 <GroupWrapper title='Border sides'>
                     <RowWrapper title='Top' tooltip={true} tooltipText={'Controls whether top edge of the border will be visible.'}>
@@ -91,7 +91,7 @@ const OptionsBar = () => {
                     <Slider min={0} max={42} measure='px'  selector='messageBorderWidth'/>
                 </RowWrapper>
                 <RowWrapper title='Border radius' tooltip={false}>
-                    <Slider min={0} max={42} measure='px'  selector='messageBorderRadius'/>
+                    <Slider min={0} max={120} measure='px'  selector='messageBorderRadius'/>
                 </RowWrapper>
                 <RowWrapper title='Text color' tooltip={true} tooltipText='RGB stands for Red, Green and Blue, values go from 0(no color, black if all are 0) to 255(maximum color, white if all are 255). A stands for Alpha, it controlls opacity, value goes from 0(transparent) to 1(opaque).'>
                     <ColorPicker selector='textColor'/>
@@ -99,10 +99,10 @@ const OptionsBar = () => {
                 <RowWrapper title='Font size' tooltip={false}>
                     <Slider min={12} max={80} measure='px'  selector='fontSize'/>
                 </RowWrapper>
-                <RowWrapper title='Padding' tooltip={true} tooltipText="Space between the box's walls and the message inside it.">
+                <RowWrapper title='Padding' tooltip={true} tooltipText="Space between the border and the message inside it.">
                     <Slider min={0} max={100} measure='px'  selector='messagePadding'/>
                 </RowWrapper>
-                <RowWrapper title='Margin' tooltip={true} tooltipText="Space between the box containing the message and other boxes.">
+                <RowWrapper title='Margin' tooltip={true} tooltipText="Space between the border and other messages' borders.">
                     <Slider min={0} max={100} measure='px'  selector='messageMargin'/>
                 </RowWrapper>
             </GroupWrapper>
@@ -112,7 +112,7 @@ const OptionsBar = () => {
                     <ColorPicker selector='metaBackgroundColor'/>
                 </RowWrapper>
                 <RowWrapper title='Border style' tooltip={false}>
-                    <Select options={['none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset']} selector='metaBorderStyle'/>
+                    <Select options={['none', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset']} selector='metaBorderStyle'/>
                 </RowWrapper>
                 <GroupWrapper title='Border sides'>
                     <RowWrapper title='Top' tooltip={true} tooltipText={'Controls whether top edge of the border will be visible.'}>
@@ -135,18 +135,18 @@ const OptionsBar = () => {
                     <Slider min={0} max={42} measure='px'  selector='metaBorderWidth'/>
                 </RowWrapper>
                 <RowWrapper title='Border radius' tooltip={false}>
-                    <Slider min={0} max={42} measure='px'  selector='metaBorderRadius'/>
+                    <Slider min={0} max={120} measure='px'  selector='metaBorderRadius'/>
                 </RowWrapper>
-                <RowWrapper title='Top position' tooltip={true} tooltipText="For when 'Name separate' is enabled. Move the name up(negative number) and down(positive number).">
+                <RowWrapper title='Top position' tooltip={true} tooltipText="Move the name up(negative number) and down(positive number).">
                     <Slider min={-60} max={60} measure='px'  selector='metaTop'/>
                 </RowWrapper>
-                <RowWrapper title='Left position' tooltip={true} tooltipText="For when 'Name separate' is enabled. Move the name left(negative number) and right(positive number).">
-                    <Slider min={-120} max={240} measure='px'  selector='metaLeft'/>
+                <RowWrapper title='Left position' tooltip={true} tooltipText="Move the name left(negative number) and right(positive number).">
+                    <Slider min={-120} max={120} measure='px'  selector='metaLeft'/>
                 </RowWrapper>
-                <RowWrapper title='Padding' tooltip={true} tooltipText="Space between the box's walls and the name inside it.">
+                <RowWrapper title='Padding' tooltip={true} tooltipText="Space between the border and the name inside it.">
                     <Slider min={0} max={100} measure='px'  selector='metaPadding'/>
                 </RowWrapper>
-                <RowWrapper title='Margin' tooltip={true} tooltipText="Space between the box containing the name and other boxes.">
+                <RowWrapper title='Margin' tooltip={true} tooltipText="Space between the border and other messages' borders.">
                     <Slider min={0} max={100} measure='px'  selector='metaMargin'/>
                 </RowWrapper>
             </GroupWrapper>}
